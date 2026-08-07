@@ -1,0 +1,146 @@
+BRIANNHA HARKIN - STARTER WEBSITE
+
+Made by Briannha Harkin.
+
+This is a very basic one-layer starter website with only:
+
+- Ford
+- Chery
+- MG
+
+FILES
+-----
+
+index.html
+    The main home page.
+    It contains the three clickable brand cards.
+
+ford.html
+    Blank Ford starter page.
+
+chery.html
+    Blank Chery starter page.
+
+mg.html
+    Blank MG starter page.
+
+assets/style.css
+    Controls the appearance of all pages.
+
+assets/site.js
+    Contains shared JavaScript.
+    Currently it only updates the footer year automatically.
+
+
+HOW THE FILES RELATE TO EACH OTHER
+----------------------------------
+
+index.html
+    |
+    +--> ford.html
+    |
+    +--> chery.html
+    |
+    +--> mg.html
+
+All four HTML pages use:
+
+assets/style.css
+assets/site.js
+
+
+HOW TO OPEN THE WEBSITE
+-----------------------
+
+1. Extract the ZIP file.
+2. Open the extracted folder.
+3. Double-click index.html.
+4. The website will open in your normal web browser.
+
+No internet connection or web server is required.
+
+
+HOW TO EDIT A PAGE
+------------------
+
+You can use:
+
+- Notepad
+- Notepad++
+- Visual Studio Code
+- another plain-text editor
+
+Right-click an HTML file and choose "Open with" your editor.
+
+
+HOW TO ADD A LINK
+-----------------
+
+Basic link:
+
+<a href="https://example.com">Example Website</a>
+
+Local page:
+
+<a href="another-page.html">Another Page</a>
+
+
+HOW TO ADD ANOTHER BRAND CARD
+-----------------------------
+
+Copy one of the existing cards inside index.html.
+
+Example:
+
+<a class="tile ford" href="ford.html">
+  <span class="kicker">Brand</span>
+  <span class="name">Ford</span>
+  <span class="detail">Open the Ford reference page.</span>
+</a>
+
+Then change:
+
+- the class
+- the file name
+- the brand name
+- the description
+
+
+ABOUT THE COMMENTS IN THE CODE
+------------------------------
+
+HTML comments look like:
+
+<!-- comment -->
+
+CSS comments look like:
+
+/* comment */
+
+JavaScript comments can look like:
+
+// comment
+
+or:
+
+/*
+comment
+*/
+
+These comments are there to explain what each section does.
+They do not appear as normal text on the finished website.
+
+
+NO REAL DATA IS INCLUDED
+------------------------
+
+This template contains:
+
+- no VIN data
+- no inventory data
+- no service data
+- no login system
+- no private information
+- no external dependencies
+
+It is intended as a simple learning and starter template.

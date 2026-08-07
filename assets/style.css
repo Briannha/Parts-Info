@@ -1,0 +1,206 @@
+/*
+============================================================
+SHARED WEBSITE STYLES
+============================================================
+
+This file controls how ALL pages look.
+
+Think of HTML as the "structure" of the website,
+and CSS as the "appearance".
+
+Every HTML page includes this file using:
+
+<link rel="stylesheet" href="assets/style.css">
+
+If you change colours, spacing, fonts, card styles, etc. here,
+those changes will affect all pages that use this stylesheet.
+*/
+
+:root {
+  /* Main website colours.
+     Change these values if you want a different colour theme. */
+  --bg: #081018;
+  --panel: #111923;
+  --line: #2d3947;
+  --text: #f5f7fa;
+  --muted: #b2bdc9;
+  --accent: #38bdf8;
+}
+
+/* Makes width calculations easier across all elements. */
+* {
+  box-sizing: border-box;
+}
+
+/* Main page background, font and text colour. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 28px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,.12), transparent 34%),
+    linear-gradient(135deg, #071018, #111827 52%, #05070a);
+}
+
+/* Keeps the page content centred and stops it becoming too wide. */
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Shared box style used by the top banner and content sections. */
+.hero,
+.section {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(12,19,27,.92);
+  box-shadow: 0 18px 45px rgba(0,0,0,.30);
+}
+
+/* The large banner at the top of each page. */
+.hero {
+  padding: 26px;
+}
+
+/* Small label above the main heading. */
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* Main page title. */
+h1 {
+  font-size: clamp(34px, 6vw, 62px);
+  line-height: 1;
+  margin: 8px 0 14px;
+}
+
+/* Removes the default large top gap from h2 headings. */
+h2 {
+  margin-top: 0;
+}
+
+/* Secondary paragraph colour and spacing. */
+p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Content box below the hero banner. */
+.section {
+  margin-top: 18px;
+  padding: 22px;
+}
+
+/*
+The grid automatically places cards side-by-side when there is enough room,
+and stacks them vertically on smaller screens.
+*/
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/*
+A tile is a clickable card.
+On the home page, each tile links to a brand page.
+*/
+.tile {
+  display: flex;
+  flex-direction: column;
+  min-height: 126px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--tile-accent, var(--accent));
+  border-radius: 15px;
+  background: #0e1721;
+  color: inherit;
+  text-decoration: none;
+  transition: .15s ease;
+}
+
+/* Small hover effect when the mouse is over a card. */
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--tile-accent, var(--accent));
+}
+
+/* Small category label at the top of each card. */
+.kicker {
+  color: var(--tile-accent, var(--accent));
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* Large card title. */
+.name {
+  font-size: 22px;
+  font-weight: 850;
+  margin-top: 8px;
+}
+
+/* Smaller card description. */
+.detail {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/*
+Placeholder box used on each brand page.
+Replace this with your own links, instructions, documents or buttons later.
+*/
+.placeholder {
+  border: 1px dashed #3a4a5a;
+  border-radius: 14px;
+  padding: 18px;
+  color: var(--muted);
+  background: #0b131c;
+}
+
+/* Simple button-style link used to return to the home page. */
+.back {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* Footer area shown at the bottom of each page. */
+.footer {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 20px 4px;
+}
+
+/*
+Brand-specific accent colours.
+These only affect the coloured left edge and labels on the cards.
+*/
+.ford  { --tile-accent: #3b82f6; }
+.chery { --tile-accent: #ef4444; }
+.mg    { --tile-accent: #f97316; }
+
+/* Makes spacing smaller on phones and narrow windows. */
+@media (max-width: 650px) {
+  body {
+    padding: 14px;
+  }
+
+  .hero,
+  .section {
+    padding: 18px;
+  }
+}
