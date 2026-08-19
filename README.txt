@@ -2,6 +2,7 @@ BRIANNHA HARKIN - STARTER WEBSITE
 
 Made by Briannha Harkin.
 
+This is a very basic one-layer starter website with only:
 
 - Ford
 - Chery
@@ -164,8 +165,9 @@ This template contains:
 The MG resource cards are visual placeholders until their real website
 addresses or local file paths are added to mg.html.
 
-No music files are included or tracked by Git. The MG player automatically
-reads music/playlist.json when hosted, and visitors can still temporarily
+No music files are included in this starter download. After music is added to
+music/tracks, it must be committed and pushed with music/playlist.json and
+music/playlist.js so GitHub Pages can play it. Visitors can still temporarily
 select audio files from their own computer. When opened directly from the
 extracted folder, the player uses music/playlist.js instead.
 

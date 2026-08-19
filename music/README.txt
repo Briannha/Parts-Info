@@ -21,8 +21,17 @@ is opened directly from the extracted folder instead of through a web server.
 The first folder beneath tracks is used as the artist name. The song filename
 is used as the track title. Tracks are sorted by their complete folder path.
 
-The music files are ignored by Git so they remain outside the repository.
-They still need to be present beside the hosted website for playback.
+The music files must be committed and pushed with the website so GitHub Pages
+can access them. After running Update-Playlist.cmd, open GitHub Desktop and
+commit all of these together:
+
+- music\tracks and every audio file inside it
+- music\playlist.json
+- music\playlist.js
+
+Push the commit, then allow GitHub Pages a short time to update before testing.
+Do not use Git LFS for these website audio files because GitHub Pages needs the
+actual audio bytes, not LFS pointer files.
 
 If the site is opened directly by double-clicking mg.html, the browser may
 block playlist.json, so the player automatically uses playlist.js instead.

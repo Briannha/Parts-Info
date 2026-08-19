@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /*
   Basic MG music player.
-  Hosted tracks are read from music/playlist.json. A local picker remains as
-  a fallback, while audio files stay outside GitHub.
+  GitHub-hosted tracks are read from music/playlist.json. A local picker
+  remains available as a temporary fallback.
   */
   const audio = document.querySelector("[data-mg-audio]");
   const filePicker = document.querySelector("[data-mg-files]");
