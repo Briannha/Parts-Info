@@ -5,87 +5,100 @@
   <!-- Basic page information. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff4fba">
 
   <!-- Browser tab title. -->
-  <title>MG</title>
+  <title>MG Catalogues And Services</title>
 
-  <!--
-  Shared stylesheet.
-  This means all brand pages use the same overall design.
-  -->
+  <!-- Shared styles, including the MG-only pink pixel theme. -->
   <link rel="stylesheet" href="assets/style.css">
 
-  <!--
-  Shared JavaScript.
-  At the moment this only updates the footer year automatically.
-  -->
+  <!-- Shared behaviour for the footer and pending links. -->
   <script defer src="assets/site.js"></script>
 
 </head>
-<body>
+<body class="mg-page">
 
-  <main class="wrap">
+  <main class="wrap mg-wrap">
 
-    <!--
-    TOP BANNER
-    Change the text inside <h1> if you want a different page title.
-    -->
-    <header class="hero">
-      <div class="eyebrow">Brand Portal</div>
-      <h1>MG</h1>
-      <p>
-        Add MG links, instructions, documents or reference tools here.
+    <!-- MG page heading. -->
+    <header class="hero mg-hero">
+      <div class="eyebrow mg-eyebrow">MG Resource Portal</div>
+      <h1 class="mg-title"><span>MG Catalogues And Services</span></h1>
+      <p class="mg-intro">
+        Quick access to MG catalogues, guides, parts tools and service requests.
       </p>
     </header>
 
     <!--
-    MAIN CONTENT AREA
+    MG LINKS
 
-    This is intentionally blank.
+    Replace # in each href with the real website address or local file path.
+    Example web link:
+      href="https://example.com"
 
-    Later, you can replace the placeholder box with:
-    - links
-    - buttons
-    - documents
-    - notes
-    - procedures
-    - tables
-    - images
+    Example local shortcut:
+      href="documents/im-catalogue.pdf"
+
+    After adding a real link, remove data-pending-link and aria-disabled.
     -->
-    <section class="section">
+    <section class="section mg-section" aria-labelledby="mg-resources-heading">
+      <h2 id="mg-resources-heading" class="mg-section-title">
+        <span>Select A Resource</span>
+      </h2>
 
-      <h2>Starter Content Area</h2>
+      <div class="mg-link-grid">
 
-      <div class="placeholder">
+        <a class="mg-sign mg-sign--wide" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Web Link</span>
+          <span class="mg-sign-label">Fluid Guild</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        <!--
-        EXAMPLE SIMPLE LINK
+        <a class="mg-sign mg-sign--wide" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Web Link</span>
+          <span class="mg-sign-label">Accessory Guide</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        Remove the comment marks around the example below if you want to use it.
+        <a class="mg-sign" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Shortcut</span>
+          <span class="mg-sign-label">IM Catalogue</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        <a href="https://example.com">Open Example Website</a>
+        <a class="mg-sign" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Shortcut</span>
+          <span class="mg-sign-label">U9 Catalogue</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        For another local HTML page, use:
+        <a class="mg-sign" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Shortcut</span>
+          <span class="mg-sign-label">MG Catalogue</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        <a href="another-page.html">Open Another Page</a>
-        -->
+        <a class="mg-sign" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Shortcut</span>
+          <span class="mg-sign-label">Parts Check / Locator</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
-        No data has been added yet.
-
-        Replace this area with your own MG links,
-        instructions, documents or reference information.
+        <a class="mg-sign mg-sign--wide" href="#" data-pending-link aria-disabled="true">
+          <span class="mg-sign-type">Shortcut</span>
+          <span class="mg-sign-label">Credit Request</span>
+          <span class="mg-sign-arrow" aria-hidden="true">›</span>
+        </a>
 
       </div>
 
-      <!--
-      This link returns to the main home page.
-      -->
-      <a class="back" href="index.html">← Back to Home</a>
+      <p class="mg-pending-message" data-pending-message role="status" aria-live="polite"></p>
 
+      <a class="back mg-back" href="index.html">← Back to Home</a>
     </section>
 
-    <!-- Footer with automatic year. -->
-    <div class="footer">
+    <div class="footer mg-footer">
       Made by Briannha Harkin · <span data-year></span>
     </div>
 

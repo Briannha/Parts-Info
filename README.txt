@@ -22,14 +22,16 @@ chery.html
     Blank Chery starter page.
 
 mg.html
-    Blank MG starter page.
+    MG Catalogues And Services page.
+    It contains seven pink pixel-style resource link cards.
 
 assets/style.css
     Controls the appearance of all pages.
 
 assets/site.js
     Contains shared JavaScript.
-    Currently it only updates the footer year automatically.
+    Updates the footer year automatically and safely handles
+    resource cards that are still waiting for their real links.
 
 
 HOW THE FILES RELATE TO EACH OTHER
@@ -142,5 +144,8 @@ This template contains:
 - no login system
 - no private information
 - no external dependencies
+
+The MG resource cards are visual placeholders until their real website
+addresses or local file paths are added to mg.html.
 
 It is intended as a simple learning and starter template.

@@ -193,6 +193,227 @@ These only affect the coloured left edge and labels on the cards.
 .chery { --tile-accent: #ef4444; }
 .mg    { --tile-accent: #f97316; }
 
+/*
+============================================================
+MG CATALOGUES AND SERVICES PAGE
+============================================================
+
+These styles only apply to mg.html because its <body> uses class="mg-page".
+The blocky lettering is designed to feel like a Minecraft sign without
+requiring a font download or an internet connection.
+*/
+.mg-page {
+  --mg-pink: #ff56c7;
+  --mg-hot-pink: #ff2cae;
+  --mg-pale-pink: #ffd8f3;
+  --mg-panel: rgba(3, 3, 8, .76);
+  background:
+    linear-gradient(rgba(255, 44, 174, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 44, 174, .035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(255, 44, 174, .22), transparent 42%),
+    linear-gradient(145deg, #08050b, #160a18 56%, #050407);
+  background-size: 24px 24px, 24px 24px, auto, auto;
+}
+
+.mg-wrap {
+  max-width: 1000px;
+}
+
+.mg-hero,
+.mg-section {
+  overflow: hidden;
+  border-color: rgba(255, 86, 199, .45);
+  background: var(--mg-panel);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, .5),
+    0 0 30px rgba(255, 44, 174, .09),
+    inset 0 0 0 1px rgba(255, 255, 255, .025);
+}
+
+.mg-hero {
+  position: relative;
+  padding: 34px 30px 32px;
+  text-align: center;
+}
+
+.mg-hero::after {
+  position: absolute;
+  right: -60px;
+  bottom: -88px;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255, 86, 199, .15);
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgba(255, 44, 174, .1);
+  content: "";
+}
+
+.mg-eyebrow {
+  position: relative;
+  z-index: 1;
+  color: var(--mg-pale-pink);
+  text-shadow: 0 0 8px rgba(255, 86, 199, .8);
+}
+
+.mg-title {
+  position: relative;
+  z-index: 1;
+  margin: 15px 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: clamp(28px, 5.4vw, 54px);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -.05em;
+}
+
+.mg-title span,
+.mg-section-title span {
+  display: inline-block;
+  padding: .24em .38em;
+  border: 1px solid rgba(255, 86, 199, .22);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .62);
+  color: var(--mg-pink);
+  text-shadow:
+    0 0 3px var(--mg-hot-pink),
+    0 0 10px rgba(255, 44, 174, .85),
+    2px 2px 0 #3b0929;
+  box-shadow:
+    0 0 18px rgba(255, 44, 174, .08),
+    inset 0 0 16px rgba(255, 44, 174, .035);
+}
+
+.mg-intro {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+  margin: 0 auto;
+  color: #d7c4d1;
+}
+
+.mg-section {
+  padding: 26px;
+}
+
+.mg-section-title {
+  margin-bottom: 19px;
+  text-align: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: clamp(17px, 3vw, 23px);
+  letter-spacing: -.04em;
+}
+
+.mg-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.mg-sign {
+  position: relative;
+  display: grid;
+  min-height: 112px;
+  padding: 17px 52px 17px 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 86, 199, .46);
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .025) 50%, transparent 50%),
+    rgba(0, 0, 0, .66);
+  background-size: 10px 10px, auto;
+  color: var(--mg-pink);
+  text-decoration: none;
+  align-content: center;
+  box-shadow:
+    0 9px 20px rgba(0, 0, 0, .36),
+    inset 0 0 20px rgba(255, 44, 174, .025);
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+
+.mg-sign::before {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(255, 216, 243, .08);
+  content: "";
+  pointer-events: none;
+}
+
+.mg-sign:hover,
+.mg-sign:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--mg-pink);
+  outline: none;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, .5),
+    0 0 19px rgba(255, 44, 174, .25),
+    inset 0 0 24px rgba(255, 44, 174, .06);
+}
+
+.mg-sign--wide {
+  grid-column: span 2;
+}
+
+.mg-sign-type {
+  margin-bottom: 8px;
+  color: #c19bb5;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.mg-sign-label {
+  position: relative;
+  z-index: 1;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: clamp(17px, 3vw, 25px);
+  font-weight: 900;
+  line-height: 1.22;
+  letter-spacing: -.055em;
+  text-shadow:
+    0 0 3px var(--mg-hot-pink),
+    0 0 9px rgba(255, 44, 174, .72),
+    2px 2px 0 #3b0929;
+}
+
+.mg-sign-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  color: var(--mg-pale-pink);
+  font-family: monospace;
+  font-size: 42px;
+  line-height: 1;
+  text-shadow: 0 0 9px rgba(255, 44, 174, .9);
+  transform: translateY(-54%);
+}
+
+.mg-pending-message {
+  min-height: 22px;
+  margin: 14px 2px 0;
+  color: #e5b6d6;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mg-back {
+  border-color: rgba(255, 86, 199, .35);
+  background: rgba(0, 0, 0, .45);
+}
+
+.mg-back:hover,
+.mg-back:focus-visible {
+  border-color: var(--mg-pink);
+  outline: none;
+  box-shadow: 0 0 12px rgba(255, 44, 174, .2);
+}
+
+.mg-footer {
+  color: #bda4b5;
+  text-align: center;
+}
+
 /* Makes spacing smaller on phones and narrow windows. */
 @media (max-width: 650px) {
   body {
@@ -202,5 +423,23 @@ These only affect the coloured left edge and labels on the cards.
   .hero,
   .section {
     padding: 18px;
+  }
+
+  .mg-link-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mg-sign--wide {
+    grid-column: auto;
+  }
+
+  .mg-sign {
+    min-height: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-sign {
+    transition: none;
   }
 }

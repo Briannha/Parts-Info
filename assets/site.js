@@ -40,4 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
     element.textContent = new Date().getFullYear();
   });
 
+  /*
+  Keep unfinished resource links from jumping to the top of the page.
+  Once a real href is added, remove data-pending-link from that link.
+  */
+  document.querySelectorAll("[data-pending-link]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const message = document.querySelector("[data-pending-message]");
+      const label = link.querySelector(".mg-sign-label")?.textContent?.trim();
+
+      if (message) {
+        message.textContent = `${label || "This resource"} is ready for its link to be added.`;
+      }
+    });
+  });
+
 });
