@@ -47,7 +47,8 @@ music/tracks/
 
 music/Update-Playlist.cmd
     Double-click this after adding or removing music. It scans music/tracks
-    recursively and updates music/playlist.json for the website player.
+    recursively and updates music/playlist.json plus the offline-safe
+    music/playlist.js file for the website player.
 
 
 HOW THE FILES RELATE TO EACH OTHER
@@ -166,6 +167,7 @@ addresses or local file paths are added to mg.html.
 
 No music files are included or tracked by Git. The MG player automatically
 reads music/playlist.json when hosted, and visitors can still temporarily
-select audio files from their own computer.
+select audio files from their own computer. When opened directly from the
+extracted folder, the player uses music/playlist.js instead.
 
 It is intended as a simple learning and starter template.

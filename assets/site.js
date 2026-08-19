@@ -122,41 +122,56 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    const useFolderPlaylist = (playlist) => {
+      const musicFolderUrl = new URL("music/", document.baseURI);
+      const folderTracks = Array.isArray(playlist?.tracks) ? playlist.tracks : [];
+
+      clearLocalUrls();
+      tracks = folderTracks
+        .filter((track) => track && typeof track.file === "string" && track.file.trim())
+        .map((track) => ({
+          title: String(track.title || track.file.split("/").pop()).replace(/\.[^.]+$/, ""),
+          artist: String(track.artist || ""),
+          src: new URL(track.file, musicFolderUrl).href
+        }));
+
+      currentTrack = 0;
+      updateButtons();
+
+      if (tracks.length) {
+        showTrack(0, false);
+      } else {
+        audio.removeAttribute("src");
+        audio.load();
+        trackName.textContent = "Music folder is empty";
+      }
+    };
+
     const loadFolderPlaylist = async () => {
       const playlistUrl = new URL("music/playlist.json", document.baseURI);
       reloadButton.disabled = true;
       trackName.textContent = "Checking music folder…";
 
       try {
+        /* Directly opened pages cannot fetch JSON, so use playlist.js. */
+        if (window.location.protocol === "file:") {
+          useFolderPlaylist(window.MG_MUSIC_PLAYLIST || { tracks: [] });
+          return;
+        }
+
         const response = await fetch(playlistUrl, { cache: "no-store" });
         if (!response.ok) throw new Error(`Playlist returned ${response.status}`);
 
         const playlist = await response.json();
-        const folderTracks = Array.isArray(playlist.tracks) ? playlist.tracks : [];
-
-        clearLocalUrls();
-        tracks = folderTracks
-          .filter((track) => track && typeof track.file === "string" && track.file.trim())
-          .map((track) => ({
-            title: String(track.title || track.file.split("/").pop()).replace(/\.[^.]+$/, ""),
-            artist: String(track.artist || ""),
-            src: new URL(track.file, playlistUrl).href
-          }));
-
-        currentTrack = 0;
-        updateButtons();
-
-        if (tracks.length) {
-          showTrack(0, false);
-        } else {
-          audio.removeAttribute("src");
-          audio.load();
-          trackName.textContent = "Music folder is empty";
-        }
+        useFolderPlaylist(playlist);
       } catch (error) {
-        tracks = [];
-        updateButtons();
-        trackName.textContent = "Folder playlist unavailable — choose music";
+        if (window.MG_MUSIC_PLAYLIST) {
+          useFolderPlaylist(window.MG_MUSIC_PLAYLIST);
+        } else {
+          tracks = [];
+          updateButtons();
+          trackName.textContent = "Folder playlist unavailable — choose music";
+        }
       } finally {
         reloadButton.disabled = false;
       }
@@ -182,10 +197,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     previousButton.addEventListener("click", () => showTrack(currentTrack - 1, true));
     nextButton.addEventListener("click", () => showTrack(currentTrack + 1, true));
-    reloadButton.addEventListener("click", loadFolderPlaylist);
+    reloadButton.addEventListener("click", () => {
+      if (window.location.protocol === "file:") {
+        window.location.reload();
+      } else {
+        loadFolderPlaylist();
+      }
+    });
     audio.addEventListener("ended", () => showTrack(currentTrack + 1, true));
     audio.addEventListener("error", () => {
-      if (tracks.length) trackName.textContent = `Could not play ${tracks[currentTrack].title}`;
+      if (!tracks.length) return;
+
+      const reasons = {
+        1: "playback was stopped",
+        2: "file not found or unavailable",
+        3: "audio could not be decoded",
+        4: "audio format is not supported"
+      };
+      const reason = reasons[audio.error?.code] || "unknown playback error";
+      trackName.textContent = `${tracks[currentTrack].title} — ${reason}`;
     });
 
     window.addEventListener("beforeunload", clearLocalUrls);
