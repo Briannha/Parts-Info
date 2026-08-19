@@ -191,7 +191,7 @@ These only affect the coloured left edge and labels on the cards.
 */
 .ford  { --tile-accent: #3b82f6; }
 .chery { --tile-accent: #ef4444; }
-.mg    { --tile-accent: #f97316; }
+.mg    { --tile-accent: #f3a7d0; }
 
 /*
 ============================================================
@@ -203,31 +203,35 @@ The blocky lettering is designed to feel like a Minecraft sign without
 requiring a font download or an internet connection.
 */
 .mg-page {
-  --mg-pink: #ff56c7;
-  --mg-hot-pink: #ff2cae;
-  --mg-pale-pink: #ffd8f3;
-  --mg-panel: rgba(3, 3, 8, .76);
-  background:
-    linear-gradient(rgba(255, 44, 174, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 44, 174, .035) 1px, transparent 1px),
-    radial-gradient(circle at 50% 0%, rgba(255, 44, 174, .22), transparent 42%),
-    linear-gradient(145deg, #08050b, #160a18 56%, #050407);
-  background-size: 24px 24px, 24px 24px, auto, auto;
+  --mg-pink: #f5bfdc;
+  --mg-hot-pink: #dfa0c2;
+  --mg-pale-pink: #fff0f8;
+  --mg-panel: rgba(17, 11, 16, .72);
+  background-color: #3d3038;
+  background-image:
+    linear-gradient(rgba(28, 18, 25, .30), rgba(28, 18, 25, .48)),
+    url("mg-cherry-moss-house.gif");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .mg-wrap {
+  position: relative;
   max-width: 1000px;
 }
 
 .mg-hero,
 .mg-section {
   overflow: hidden;
-  border-color: rgba(255, 86, 199, .45);
+  border-color: rgba(245, 191, 220, .44);
   background: var(--mg-panel);
+  backdrop-filter: blur(5px);
   box-shadow:
     0 22px 50px rgba(0, 0, 0, .5),
-    0 0 30px rgba(255, 44, 174, .09),
-    inset 0 0 0 1px rgba(255, 255, 255, .025);
+    0 0 24px rgba(245, 191, 220, .08),
+    inset 0 0 0 1px rgba(255, 240, 248, .04);
 }
 
 .mg-hero {
@@ -242,9 +246,9 @@ requiring a font download or an internet connection.
   bottom: -88px;
   width: 230px;
   height: 230px;
-  border: 1px solid rgba(255, 86, 199, .15);
+  border: 1px solid rgba(245, 191, 220, .18);
   border-radius: 50%;
-  box-shadow: 0 0 50px rgba(255, 44, 174, .1);
+  box-shadow: 0 0 50px rgba(245, 191, 220, .08);
   content: "";
 }
 
@@ -252,7 +256,7 @@ requiring a font download or an internet connection.
   position: relative;
   z-index: 1;
   color: var(--mg-pale-pink);
-  text-shadow: 0 0 8px rgba(255, 86, 199, .8);
+  text-shadow: 0 0 7px rgba(245, 191, 220, .55);
 }
 
 .mg-title {
@@ -270,17 +274,17 @@ requiring a font download or an internet connection.
 .mg-section-title span {
   display: inline-block;
   padding: .24em .38em;
-  border: 1px solid rgba(255, 86, 199, .22);
+  border: 1px solid rgba(245, 191, 220, .24);
   border-radius: 3px;
   background: rgba(0, 0, 0, .62);
   color: var(--mg-pink);
   text-shadow:
-    0 0 3px var(--mg-hot-pink),
-    0 0 10px rgba(255, 44, 174, .85),
-    2px 2px 0 #3b0929;
+    0 0 2px var(--mg-hot-pink),
+    0 0 8px rgba(245, 191, 220, .48),
+    2px 2px 0 #422b38;
   box-shadow:
-    0 0 18px rgba(255, 44, 174, .08),
-    inset 0 0 16px rgba(255, 44, 174, .035);
+    0 0 16px rgba(245, 191, 220, .06),
+    inset 0 0 16px rgba(245, 191, 220, .025);
 }
 
 .mg-intro {
@@ -288,7 +292,104 @@ requiring a font download or an internet connection.
   z-index: 1;
   max-width: 650px;
   margin: 0 auto;
-  color: #d7c4d1;
+  color: #eadce4;
+}
+
+.mg-player {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border: 1px solid rgba(245, 191, 220, .42);
+  border-radius: 16px;
+  background: rgba(17, 11, 16, .76);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 15px 34px rgba(0, 0, 0, .4);
+}
+
+.mg-player-heading {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 13px;
+  align-items: center;
+}
+
+.mg-player-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(245, 191, 220, .42);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, .48);
+  color: var(--mg-pink);
+  font-size: 22px;
+  place-items: center;
+  text-shadow: 0 0 7px rgba(245, 191, 220, .48);
+}
+
+.mg-player-kicker {
+  display: block;
+  margin-bottom: 4px;
+  color: #caaabc;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.mg-track-name {
+  display: block;
+  color: var(--mg-pale-pink);
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+}
+
+.mg-audio {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 12px;
+  filter: sepia(.1) saturate(.65) hue-rotate(285deg) brightness(1.07);
+}
+
+.mg-player-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mg-player-button {
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid rgba(245, 191, 220, .38);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, .52);
+  color: var(--mg-pale-pink);
+  font: 700 12px "Lucida Console", "Courier New", monospace;
+  cursor: pointer;
+}
+
+.mg-player-button:hover,
+.mg-player-button:focus-visible {
+  border-color: var(--mg-pink);
+  outline: none;
+  box-shadow: 0 0 10px rgba(245, 191, 220, .18);
+}
+
+.mg-player-button:disabled {
+  cursor: not-allowed;
+  opacity: .42;
+}
+
+.mg-file-button {
+  display: inline-grid;
+  align-items: center;
+}
+
+.mg-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .mg-section {
@@ -315,7 +416,7 @@ requiring a font download or an internet connection.
   min-height: 112px;
   padding: 17px 52px 17px 18px;
   overflow: hidden;
-  border: 1px solid rgba(255, 86, 199, .46);
+  border: 1px solid rgba(245, 191, 220, .42);
   border-radius: 4px;
   background:
     linear-gradient(90deg, rgba(255, 255, 255, .025) 50%, transparent 50%),
@@ -326,7 +427,7 @@ requiring a font download or an internet connection.
   align-content: center;
   box-shadow:
     0 9px 20px rgba(0, 0, 0, .36),
-    inset 0 0 20px rgba(255, 44, 174, .025);
+    inset 0 0 20px rgba(245, 191, 220, .025);
   transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
 }
 
@@ -345,8 +446,8 @@ requiring a font download or an internet connection.
   outline: none;
   box-shadow:
     0 12px 26px rgba(0, 0, 0, .5),
-    0 0 19px rgba(255, 44, 174, .25),
-    inset 0 0 24px rgba(255, 44, 174, .06);
+    0 0 16px rgba(245, 191, 220, .19),
+    inset 0 0 24px rgba(245, 191, 220, .045);
 }
 
 .mg-sign--wide {
@@ -355,7 +456,7 @@ requiring a font download or an internet connection.
 
 .mg-sign-type {
   margin-bottom: 8px;
-  color: #c19bb5;
+  color: #cfb2c2;
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 10px;
   font-weight: 900;
@@ -372,9 +473,9 @@ requiring a font download or an internet connection.
   line-height: 1.22;
   letter-spacing: -.055em;
   text-shadow:
-    0 0 3px var(--mg-hot-pink),
-    0 0 9px rgba(255, 44, 174, .72),
-    2px 2px 0 #3b0929;
+    0 0 2px var(--mg-hot-pink),
+    0 0 7px rgba(245, 191, 220, .42),
+    2px 2px 0 #422b38;
 }
 
 .mg-sign-arrow {
@@ -385,20 +486,20 @@ requiring a font download or an internet connection.
   font-family: monospace;
   font-size: 42px;
   line-height: 1;
-  text-shadow: 0 0 9px rgba(255, 44, 174, .9);
+  text-shadow: 0 0 7px rgba(245, 191, 220, .48);
   transform: translateY(-54%);
 }
 
 .mg-pending-message {
   min-height: 22px;
   margin: 14px 2px 0;
-  color: #e5b6d6;
+  color: #e6cbd9;
   font-size: 13px;
   text-align: center;
 }
 
 .mg-back {
-  border-color: rgba(255, 86, 199, .35);
+  border-color: rgba(245, 191, 220, .35);
   background: rgba(0, 0, 0, .45);
 }
 
@@ -406,11 +507,11 @@ requiring a font download or an internet connection.
 .mg-back:focus-visible {
   border-color: var(--mg-pink);
   outline: none;
-  box-shadow: 0 0 12px rgba(255, 44, 174, .2);
+  box-shadow: 0 0 12px rgba(245, 191, 220, .16);
 }
 
 .mg-footer {
-  color: #bda4b5;
+  color: #eadce4;
   text-align: center;
 }
 
@@ -436,9 +537,26 @@ requiring a font download or an internet connection.
   .mg-sign {
     min-height: 96px;
   }
+
+  .mg-player-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mg-file-button {
+    grid-column: span 2;
+    grid-row: 1;
+    justify-content: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mg-page {
+    background-image:
+      linear-gradient(rgba(28, 18, 25, .30), rgba(28, 18, 25, .48)),
+      url("mg-cherry-moss-house.png");
+  }
+
   .mg-sign {
     transition: none;
   }
