@@ -33,6 +33,9 @@ Push the commit, then allow GitHub Pages a short time to update before testing.
 Do not use Git LFS for these website audio files because GitHub Pages needs the
 actual audio bytes, not LFS pointer files.
 
+The animated MG background is also intentionally below GitHub's 50 MiB warning
+point and can be committed through GitHub Desktop with the rest of the site.
+
 If the site is opened directly by double-clicking mg.html, the browser may
 block playlist.json, so the player automatically uses playlist.js instead.
 

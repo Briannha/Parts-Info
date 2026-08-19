@@ -37,7 +37,10 @@ assets/site.js
     It also runs the MG music player.
 
 assets/mg-cherry-moss-house.gif
-    Animated MG page background with drifting petals and particles.
+    Animated 1280 x 720 MG page background with 240 frames at 20 FPS.
+    The 12-second loop includes drifting petals, particles and independently
+    flickering warm lantern glows. The file is approximately 48.9 MiB and is
+    intended to be committed through GitHub Desktop.
 
 assets/mg-cherry-moss-house.png
     Still background used when reduced-motion mode is enabled.
