@@ -222,6 +222,63 @@ requiring a font download or an internet connection.
   max-width: 1000px;
 }
 
+.mg-view-toggle {
+  position: fixed;
+  z-index: 1000;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  min-height: 38px;
+  padding: 9px 12px;
+  gap: 8px;
+  border: 1px solid rgba(245, 191, 220, .52);
+  border-radius: 4px;
+  background: rgba(8, 5, 7, .72);
+  color: var(--mg-pale-pink);
+  font: 700 12px "Lucida Console", "Courier New", monospace;
+  cursor: pointer;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .34);
+}
+
+.mg-view-toggle:hover,
+.mg-view-toggle:focus-visible {
+  border-color: var(--mg-pink);
+  outline: none;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .34), 0 0 12px rgba(245, 191, 220, .18);
+}
+
+.mg-background-only {
+  padding: 0;
+  overflow: hidden;
+  background-image: url("mg-cherry-moss-house.gif");
+}
+
+.mg-background-only .mg-wrap {
+  display: none;
+}
+
+.mg-background-only .mg-view-toggle {
+  width: 40px;
+  padding: 0;
+  justify-content: center;
+  opacity: .28;
+}
+
+.mg-background-only .mg-view-toggle:hover,
+.mg-background-only .mg-view-toggle:focus-visible {
+  opacity: 1;
+}
+
+.mg-background-only [data-mg-view-toggle-label] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
 .mg-hero,
 .mg-section {
   overflow: hidden;
@@ -548,6 +605,21 @@ requiring a font download or an internet connection.
     grid-row: 1;
     justify-content: center;
   }
+
+  [data-mg-previous] {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  [data-mg-next] {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  [data-mg-reload] {
+    grid-column: span 2;
+    grid-row: 3;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -555,6 +627,10 @@ requiring a font download or an internet connection.
     background-image:
       linear-gradient(rgba(28, 18, 25, .30), rgba(28, 18, 25, .48)),
       url("mg-cherry-moss-house.png");
+  }
+
+  .mg-page.mg-background-only {
+    background-image: url("mg-cherry-moss-house.png");
   }
 
   .mg-sign {

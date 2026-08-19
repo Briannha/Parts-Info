@@ -5,7 +5,7 @@
   <!-- Basic page information. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ff4fba">
+  <meta name="theme-color" content="#f5bfdc">
 
   <!-- Browser tab title. -->
   <title>MG Catalogues And Services</title>
@@ -18,6 +18,18 @@
 
 </head>
 <body class="mg-page">
+
+  <!-- Hides or restores the full page interface without stopping the music. -->
+  <button
+    class="mg-view-toggle"
+    type="button"
+    data-mg-view-toggle
+    aria-pressed="false"
+    title="Press Escape to restore the page"
+  >
+    <span aria-hidden="true">▣</span>
+    <span data-mg-view-toggle-label>View Background</span>
+  </button>
 
   <main class="wrap mg-wrap">
 
@@ -33,8 +45,8 @@
     <!--
     BASIC MUSIC PLAYER
 
-    Music stays outside the website ZIP. Select audio files from the computer
-    to play them without uploading or adding them to the repository.
+    Music stays outside GitHub. The player first reads music/playlist.json,
+    while Choose Music remains available for temporary local playback.
     -->
     <section class="mg-player" aria-label="Music player">
       <div class="mg-player-heading">
@@ -49,6 +61,7 @@
 
       <div class="mg-player-actions">
         <button class="mg-player-button" type="button" data-mg-previous disabled>Previous</button>
+        <button class="mg-player-button" type="button" data-mg-reload>Reload Folder</button>
         <label class="mg-player-button mg-file-button" for="mg-music-files">
           Choose Music
         </label>

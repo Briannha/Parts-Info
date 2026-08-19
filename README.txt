@@ -24,7 +24,8 @@ chery.html
 mg.html
     MG Catalogues And Services page.
     It contains seven pastel-pink pixel-style resource link cards,
-    an animated cherry-and-moss block house background and a music player.
+    an animated cherry-and-moss block house background, a background-only
+    viewing button and a music player.
 
 assets/style.css
     Controls the appearance of all pages.
@@ -40,6 +41,13 @@ assets/mg-cherry-moss-house.gif
 
 assets/mg-cherry-moss-house.png
     Still background used when reduced-motion mode is enabled.
+
+music/tracks/
+    Put music here. Artist and album subfolders are supported.
+
+music/Update-Playlist.cmd
+    Double-click this after adding or removing music. It scans music/tracks
+    recursively and updates music/playlist.json for the website player.
 
 
 HOW THE FILES RELATE TO EACH OTHER
@@ -156,7 +164,8 @@ This template contains:
 The MG resource cards are visual placeholders until their real website
 addresses or local file paths are added to mg.html.
 
-No music files are included. The MG player lets each visitor select audio
-files already stored on their own computer.
+No music files are included or tracked by Git. The MG player automatically
+reads music/playlist.json when hosted, and visitors can still temporarily
+select audio files from their own computer.
 
 It is intended as a simple learning and starter template.

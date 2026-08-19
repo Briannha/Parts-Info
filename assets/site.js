@@ -58,52 +58,138 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /*
+  Background-only viewing mode.
+  The small fixed button stays visible so the page can always be restored.
+  */
+  const viewToggle = document.querySelector("[data-mg-view-toggle]");
+  const viewToggleLabel = document.querySelector("[data-mg-view-toggle-label]");
+
+  if (viewToggle && viewToggleLabel) {
+    const setBackgroundOnly = (enabled) => {
+      document.body.classList.toggle("mg-background-only", enabled);
+      viewToggle.setAttribute("aria-pressed", String(enabled));
+      viewToggleLabel.textContent = enabled ? "Show Page" : "View Background";
+    };
+
+    viewToggle.addEventListener("click", () => {
+      setBackgroundOnly(!document.body.classList.contains("mg-background-only"));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setBackgroundOnly(false);
+    });
+  }
+
+  /*
   Basic MG music player.
-  The visitor selects music from their own computer, so audio files do not
-  need to be uploaded or committed with the website.
+  Hosted tracks are read from music/playlist.json. A local picker remains as
+  a fallback, while audio files stay outside GitHub.
   */
   const audio = document.querySelector("[data-mg-audio]");
   const filePicker = document.querySelector("[data-mg-files]");
   const previousButton = document.querySelector("[data-mg-previous]");
   const nextButton = document.querySelector("[data-mg-next]");
+  const reloadButton = document.querySelector("[data-mg-reload]");
   const trackName = document.querySelector("[data-mg-track]");
 
-  if (audio && filePicker && previousButton && nextButton && trackName) {
+  if (audio && filePicker && previousButton && nextButton && reloadButton && trackName) {
     let tracks = [];
     let currentTrack = 0;
-    let activeUrl = "";
+    let localUrls = [];
+
+    const updateButtons = () => {
+      previousButton.disabled = tracks.length < 2;
+      nextButton.disabled = tracks.length < 2;
+    };
+
+    const clearLocalUrls = () => {
+      localUrls.forEach((url) => URL.revokeObjectURL(url));
+      localUrls = [];
+    };
 
     const showTrack = (index, autoplay = false) => {
       if (!tracks.length) return;
 
       currentTrack = (index + tracks.length) % tracks.length;
-
-      if (activeUrl) URL.revokeObjectURL(activeUrl);
-      activeUrl = URL.createObjectURL(tracks[currentTrack]);
-      audio.src = activeUrl;
-      trackName.textContent = tracks[currentTrack].name.replace(/\.[^.]+$/, "");
+      const track = tracks[currentTrack];
+      audio.src = track.src;
+      trackName.textContent = track.artist
+        ? `${track.artist} — ${track.title}`
+        : track.title;
 
       if (autoplay) {
         audio.play().catch(() => {});
       }
     };
 
+    const loadFolderPlaylist = async () => {
+      const playlistUrl = new URL("music/playlist.json", document.baseURI);
+      reloadButton.disabled = true;
+      trackName.textContent = "Checking music folder…";
+
+      try {
+        const response = await fetch(playlistUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Playlist returned ${response.status}`);
+
+        const playlist = await response.json();
+        const folderTracks = Array.isArray(playlist.tracks) ? playlist.tracks : [];
+
+        clearLocalUrls();
+        tracks = folderTracks
+          .filter((track) => track && typeof track.file === "string" && track.file.trim())
+          .map((track) => ({
+            title: String(track.title || track.file.split("/").pop()).replace(/\.[^.]+$/, ""),
+            artist: String(track.artist || ""),
+            src: new URL(track.file, playlistUrl).href
+          }));
+
+        currentTrack = 0;
+        updateButtons();
+
+        if (tracks.length) {
+          showTrack(0, false);
+        } else {
+          audio.removeAttribute("src");
+          audio.load();
+          trackName.textContent = "Music folder is empty";
+        }
+      } catch (error) {
+        tracks = [];
+        updateButtons();
+        trackName.textContent = "Folder playlist unavailable — choose music";
+      } finally {
+        reloadButton.disabled = false;
+      }
+    };
+
     filePicker.addEventListener("change", () => {
-      tracks = Array.from(filePicker.files || []);
+      clearLocalUrls();
+      tracks = Array.from(filePicker.files || []).map((file) => {
+        const src = URL.createObjectURL(file);
+        localUrls.push(src);
+
+        return {
+          title: file.name.replace(/\.[^.]+$/, ""),
+          artist: "",
+          src
+        };
+      });
       currentTrack = 0;
-      previousButton.disabled = tracks.length < 2;
-      nextButton.disabled = tracks.length < 2;
+      updateButtons();
 
       if (tracks.length) showTrack(0, true);
     });
 
     previousButton.addEventListener("click", () => showTrack(currentTrack - 1, true));
     nextButton.addEventListener("click", () => showTrack(currentTrack + 1, true));
+    reloadButton.addEventListener("click", loadFolderPlaylist);
     audio.addEventListener("ended", () => showTrack(currentTrack + 1, true));
-
-    window.addEventListener("beforeunload", () => {
-      if (activeUrl) URL.revokeObjectURL(activeUrl);
+    audio.addEventListener("error", () => {
+      if (tracks.length) trackName.textContent = `Could not play ${tracks[currentTrack].title}`;
     });
+
+    window.addEventListener("beforeunload", clearLocalUrls);
+    loadFolderPlaylist();
   }
 
 });

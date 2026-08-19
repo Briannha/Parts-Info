@@ -1,0 +1,4 @@
+Put music files in this folder.
+
+Artist and album subfolders are supported.
+After adding or removing music, double-click ..\Update-Playlist.cmd.
