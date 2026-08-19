@@ -2,7 +2,6 @@ BRIANNHA HARKIN - STARTER WEBSITE
 
 Made by Briannha Harkin.
 
-This is a very basic one-layer starter website with only:
 
 - Ford
 - Chery
