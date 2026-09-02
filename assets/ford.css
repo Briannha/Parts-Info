@@ -10,7 +10,7 @@
   background-image:
     linear-gradient(rgba(2, 12, 22, .28), rgba(2, 12, 22, .58)),
     radial-gradient(circle at 50% 25%, rgba(67, 151, 222, .18), transparent 38%),
-    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWZCxQVgCFU8T_H4L6DwzL3SMzWa9OQjiYnfmJNvaF0Q&s=10");
+    url("ford-underwater-background.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -53,7 +53,7 @@
   padding: 0;
   overflow: hidden;
   background-image:
-    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWZCxQVgCFU8T_H4L6DwzL3SMzWa9OQjiYnfmJNvaF0Q&s=10");
+    url("ford-underwater-background.png");
 }
 
 .ford-page.mg-background-only .ford-wrap {
