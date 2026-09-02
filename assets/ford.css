@@ -10,7 +10,7 @@
   background-image:
     linear-gradient(rgba(2, 12, 22, .28), rgba(2, 12, 22, .58)),
     radial-gradient(circle at 50% 25%, rgba(67, 151, 222, .18), transparent 38%),
-    url("ford-underwater-background.png");
+    url("ford-underwater-animated-v2.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -53,7 +53,7 @@
   padding: 0;
   overflow: hidden;
   background-image:
-    url("ford-underwater-background.png");
+    url("ford-underwater-animated-v2.webp");
 }
 
 .ford-page.mg-background-only .ford-wrap {
