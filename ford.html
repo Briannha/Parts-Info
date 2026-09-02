@@ -1,91 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- Basic page information. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b5fa5">
+  <title>Ford Catalogues And Services</title>
 
-  <!-- Browser tab title. -->
-  <title>Ford</title>
-
-  <!--
-  Shared stylesheet.
-  This means all brand pages use the same overall design.
-  -->
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/ford.css">
 
-  <!--
-  Shared JavaScript.
-  At the moment this only updates the footer year automatically.
-  -->
+  <script src="music/playlist.js"></script>
   <script defer src="assets/site.js"></script>
-
 </head>
-<body>
 
-  <main class="wrap">
+<body class="ford-page">
 
-    <!--
-    TOP BANNER
-    Change the text inside <h1> if you want a different page title.
-    -->
-    <header class="hero">
-      <div class="eyebrow">Brand Portal</div>
-      <h1>Ford</h1>
-      <p>
-        Add Ford links, instructions, documents or reference tools here.
+  <button
+    class="ford-view-toggle"
+    type="button"
+    data-mg-view-toggle
+    aria-pressed="false"
+    title="Press Escape to restore the page"
+  >
+    <span aria-hidden="true">◉</span>
+    <span data-mg-view-toggle-label>View Background</span>
+  </button>
+
+  <main class="wrap ford-wrap">
+
+    <header class="hero ford-hero">
+      <div class="eyebrow ford-eyebrow">Ford Resource Portal</div>
+      <h1 class="ford-title"><span>Ford</span></h1>
+      <p class="ford-intro">
+        Quick access to Ford catalogues, parts resources, guides and service tools.
       </p>
     </header>
 
-    <!--
-    MAIN CONTENT AREA
+    <section class="ford-player" aria-label="Music player">
+      <div class="ford-player-heading">
+        <span class="ford-player-icon" aria-hidden="true">♫</span>
+        <div>
+          <span class="ford-player-kicker">Music Player</span>
+          <strong class="ford-track-name" data-mg-track>Choose music to begin</strong>
+        </div>
+      </div>
 
-    This is intentionally blank.
+      <audio class="ford-audio" data-mg-audio controls preload="metadata"></audio>
 
-    Later, you can replace the placeholder box with:
-    - links
-    - buttons
-    - documents
-    - notes
-    - procedures
-    - tables
-    - images
-    -->
-    <section class="section">
+      <div class="ford-player-actions">
+        <button class="ford-player-button" type="button" data-mg-previous disabled>Previous</button>
+        <button class="ford-player-button" type="button" data-mg-reload>Reload Folder</button>
 
-      <h2>Starter Content Area</h2>
+        <label class="ford-player-button ford-file-button" for="ford-music-files">
+          Choose Music
+        </label>
 
-      <div class="placeholder">
+        <input
+          class="ford-file-input"
+          id="ford-music-files"
+          data-mg-files
+          type="file"
+          accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac"
+          multiple
+        >
 
-        <!--
-        EXAMPLE SIMPLE LINK
+        <button class="ford-player-button" type="button" data-mg-next disabled>Next</button>
+      </div>
+    </section>
 
-        Remove the comment marks around the example below if you want to use it.
+    <section class="section ford-section" aria-labelledby="ford-resources-heading">
+      <h2 id="ford-resources-heading" class="ford-section-title">
+        <span>Select A Resource</span>
+      </h2>
 
-        <a href="https://example.com">Open Example Website</a>
+      <div class="ford-link-grid">
 
-        For another local HTML page, use:
+        <a class="ford-card ford-card--wide" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Ford Parts Catalogue</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
 
-        <a href="another-page.html">Open Another Page</a>
-        -->
+        <a class="ford-card" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Parts Check / Locator</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
 
-        No data has been added yet.
+        <a class="ford-card" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Parts Guides</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
 
-        Replace this area with your own Ford links,
-        instructions, documents or reference information.
+        <a class="ford-card" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Accessories</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="ford-card" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Technical Information</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="ford-card ford-card--wide" href="#" data-pending-link aria-disabled="true">
+          <span class="ford-card-type">Ford Resource</span>
+          <span class="ford-card-label mg-sign-label">Credit / Support Request</span>
+          <span class="ford-card-arrow" aria-hidden="true">›</span>
+        </a>
 
       </div>
 
-      <!--
-      This link returns to the main home page.
-      -->
-      <a class="back" href="index.html">← Back to Home</a>
+      <p class="ford-pending-message" data-pending-message role="status" aria-live="polite"></p>
 
+      <a class="back ford-back" href="index.html">← Back to Home</a>
     </section>
 
-    <!-- Footer with automatic year. -->
-    <div class="footer">
+    <div class="footer ford-footer">
       Made by Briannha Harkin · <span data-year></span>
     </div>
 
