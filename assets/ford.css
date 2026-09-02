@@ -1,395 +1,260 @@
-/* Ford-only portal styling. Loaded by ford.html after assets/style.css. */
+/* Ford page: static scene + transparent CSS animation overlays.
+   The animation layer never replaces or redraws the background image. */
 
 .ford-page {
-  --ford-blue: #3f91df;
-  --ford-bright: #8dcbff;
-  --ford-pale: #e7f5ff;
-  --ford-panel: rgba(5, 18, 31, .76);
-  min-height: 100vh;
-  background-color: #07111d;
+  --ford-blue:#0068b5;
+  --ford-bright:#9fd5ff;
+  --ford-pale:#eef8ff;
+  position:relative;
+  isolation:isolate;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:#061523 url("ford-underwater-background.png") center/cover fixed no-repeat;
+}
+
+.ford-page::before {
+  position:fixed;
+  z-index:-1;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,17,36,.08), rgba(0,13,28,.30)),
+    radial-gradient(circle at 50% 0%, rgba(106,194,255,.08), transparent 43%);
+  content:"";
+  pointer-events:none;
+}
+
+.ford-water-fx {
+  position:fixed;
+  z-index:0;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* Keep all actual site content above the effects. */
+.ford-wrap,
+.ford-view-toggle {
+  position:relative;
+  z-index:5;
+}
+
+.ford-light-rays {
+  position:absolute;
+  inset:-15% -10%;
+  opacity:.28;
+  background:
+    repeating-linear-gradient(
+      108deg,
+      transparent 0 8%,
+      rgba(190,232,255,.14) 10% 11%,
+      transparent 13% 22%
+    );
+  filter:blur(14px);
+  transform-origin:50% 0;
+  animation:ford-rays 10s ease-in-out infinite alternate;
+}
+@keyframes ford-rays {
+  from { transform:translate3d(-2%,0,0) skewX(-2deg); opacity:.20; }
+  to   { transform:translate3d(2%,1%,0) skewX(2deg); opacity:.34; }
+}
+
+/* Bubble streams are CSS radial dots moving upward. */
+.ford-bubbles {
+  position:absolute;
+  bottom:-25%;
+  width:100px;
+  height:125%;
+  opacity:.45;
   background-image:
-    linear-gradient(rgba(2, 12, 22, .28), rgba(2, 12, 22, .58)),
-    radial-gradient(circle at 50% 25%, rgba(67, 151, 222, .18), transparent 38%),
-    url("ford-underwater-animated-v2.webp");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+    radial-gradient(circle, rgba(235,250,255,.82) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(210,241,255,.65) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(255,255,255,.54) 0 1px, transparent 2px);
+  background-size:34px 54px, 48px 71px, 28px 43px;
+  animation:ford-bubble-rise 11s linear infinite;
+}
+.ford-bubbles--a { left:5%; animation-duration:12s; }
+.ford-bubbles--b { left:55%; transform:scale(.72); animation-duration:15s; animation-delay:-6s; }
+.ford-bubbles--c { right:4%; transform:scale(1.1); animation-duration:10s; animation-delay:-3s; }
+@keyframes ford-bubble-rise {
+  from { translate:0 12%; }
+  to   { translate:12px -88%; }
+}
+
+/* Small foreground fish only; they never obscure the house. */
+.ford-fish {
+  position:absolute;
+  opacity:.72;
+  font-size:clamp(28px,3vw,52px);
+  filter:drop-shadow(0 5px 5px rgba(0,0,0,.26));
+  will-change:transform;
+}
+.ford-fish--one {
+  top:23%;
+  left:-8%;
+  animation:ford-fish-right 24s linear infinite;
+}
+.ford-fish--two {
+  top:48%;
+  right:-8%;
+  transform:scaleX(-1);
+  animation:ford-fish-left 31s linear -9s infinite;
+}
+.ford-fish--three {
+  top:68%;
+  left:-8%;
+  font-size:clamp(20px,2.3vw,38px);
+  animation:ford-fish-right-low 35s linear -17s infinite;
+}
+@keyframes ford-fish-right {
+  0% { transform:translate3d(0,0,0) rotate(-2deg); }
+  45% { transform:translate3d(52vw,18px,0) rotate(2deg); }
+  100% { transform:translate3d(116vw,-8px,0) rotate(-2deg); }
+}
+@keyframes ford-fish-left {
+  0% { transform:scaleX(-1) translate3d(0,0,0); }
+  50% { transform:scaleX(-1) translate3d(58vw,-14px,0); }
+  100% { transform:scaleX(-1) translate3d(116vw,8px,0); }
+}
+@keyframes ford-fish-right-low {
+  0% { transform:translate3d(0,0,0); }
+  100% { transform:translate3d(116vw,-18px,0); }
 }
 
 .ford-wrap {
-  position: relative;
-  max-width: 1000px;
+  max-width:1000px;
+  margin:auto;
 }
 
 .ford-view-toggle {
-  position: fixed;
-  z-index: 1000;
-  top: 14px;
-  right: 14px;
-  display: inline-flex;
-  min-height: 40px;
-  padding: 9px 13px;
-  gap: 8px;
-  border: 1px solid rgba(141, 203, 255, .55);
-  border-radius: 999px;
-  background: rgba(3, 13, 23, .78);
-  color: var(--ford-pale);
-  font: 800 12px "Segoe UI", Arial, sans-serif;
-  cursor: pointer;
-  align-items: center;
-  backdrop-filter: blur(7px);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, .35), 0 0 18px rgba(63, 145, 223, .08);
-}
-
-.ford-view-toggle:hover,
-.ford-view-toggle:focus-visible {
-  border-color: var(--ford-bright);
-  outline: none;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, .38), 0 0 20px rgba(63, 145, 223, .22);
+  position:fixed;
+  top:14px;
+  right:14px;
+  display:inline-flex;
+  min-height:40px;
+  padding:9px 13px;
+  gap:8px;
+  border:1px solid rgba(159,213,255,.55);
+  border-radius:999px;
+  background:rgba(3,15,28,.74);
+  color:var(--ford-pale);
+  font:800 12px "Segoe UI",Arial,sans-serif;
+  cursor:pointer;
+  align-items:center;
+  backdrop-filter:blur(7px);
+  box-shadow:0 10px 26px rgba(0,0,0,.34);
 }
 
 .ford-page.mg-background-only {
-  padding: 0;
-  overflow: hidden;
-  background-image:
-    url("ford-underwater-animated-v2.webp");
+  padding:0;
+  overflow:hidden;
 }
-
-.ford-page.mg-background-only .ford-wrap {
-  display: none;
-}
-
+.ford-page.mg-background-only .ford-wrap { display:none; }
 .ford-page.mg-background-only .ford-view-toggle {
-  width: 42px;
-  padding: 0;
-  justify-content: center;
-  opacity: .3;
+  width:42px;
+  padding:0;
+  justify-content:center;
+  opacity:.32;
 }
-
-.ford-page.mg-background-only .ford-view-toggle:hover,
-.ford-page.mg-background-only .ford-view-toggle:focus-visible {
-  opacity: 1;
-}
-
+.ford-page.mg-background-only .ford-view-toggle:hover { opacity:1; }
 .ford-page.mg-background-only [data-mg-view-toggle-label] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
+  position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
 }
 
 .ford-hero,
-.ford-section,
-.ford-player {
-  border-color: rgba(97, 174, 239, .48);
-  background: linear-gradient(145deg, rgba(8, 28, 47, .86), rgba(3, 14, 26, .77));
-  backdrop-filter: blur(8px) saturate(1.08);
-  box-shadow:
-    0 24px 55px rgba(0, 0, 0, .48),
-    0 0 30px rgba(37, 126, 202, .08),
-    inset 0 0 0 1px rgba(216, 239, 255, .04);
+.ford-player,
+.ford-section {
+  border:1px solid rgba(103,183,246,.42);
+  background:linear-gradient(145deg,rgba(6,26,45,.76),rgba(2,12,24,.68));
+  backdrop-filter:blur(7px) saturate(1.05);
+  box-shadow:0 22px 50px rgba(0,0,0,.42),inset 0 0 0 1px rgba(219,241,255,.035);
 }
 
 .ford-hero {
-  position: relative;
-  overflow: hidden;
-  padding: 38px 32px 36px;
-  text-align: center;
+  padding:27px 30px 30px;
+  text-align:center;
+  overflow:hidden;
 }
 
-.ford-hero::before {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 0 42%, rgba(108, 187, 255, .045) 50%, transparent 58%);
-  content: "";
-  pointer-events: none;
-}
-
-.ford-hero::after {
-  position: absolute;
-  left: 50%;
-  bottom: -150px;
-  width: 440px;
-  height: 240px;
-  border: 1px solid rgba(113, 190, 255, .18);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 70px rgba(60, 151, 226, .1);
-  content: "";
+.ford-logo {
+  display:block;
+  width:clamp(160px,25vw,245px);
+  height:auto;
+  margin:0 auto 15px;
+  filter:drop-shadow(0 7px 16px rgba(0,0,0,.35)) drop-shadow(0 0 15px rgba(55,155,231,.18));
 }
 
 .ford-eyebrow {
-  position: relative;
-  z-index: 1;
-  color: var(--ford-bright);
-  text-shadow: 0 0 10px rgba(82, 170, 244, .5);
+  color:var(--ford-bright);
+  text-shadow:0 0 10px rgba(78,174,246,.36);
 }
 
 .ford-title {
-  position: relative;
-  z-index: 1;
-  margin: 12px 0 13px;
-  color: #fff;
-  font-size: clamp(38px, 7vw, 70px);
-  font-style: italic;
-  font-weight: 850;
-  letter-spacing: -.055em;
-  text-shadow: 0 3px 18px rgba(0, 0, 0, .5), 0 0 28px rgba(75, 163, 239, .18);
-}
-
-.ford-title span {
-  display: inline-block;
-  padding: .1em .45em .15em;
-  border: 2px solid rgba(181, 222, 255, .68);
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(32, 119, 193, .92), rgba(8, 65, 118, .88));
-  box-shadow:
-    0 0 0 4px rgba(6, 58, 107, .48),
-    0 0 28px rgba(72, 159, 233, .24),
-    inset 0 0 24px rgba(188, 226, 255, .12);
+  margin:8px 0 12px;
+  color:#f5fbff;
+  font-size:clamp(30px,5vw,52px);
+  line-height:1.05;
 }
 
 .ford-intro {
-  position: relative;
-  z-index: 1;
-  max-width: 670px;
-  margin: 0 auto;
-  color: #d7e8f5;
+  max-width:670px;
+  margin:0 auto;
+  color:#d7e7f4;
 }
 
 .ford-player {
-  margin-top: 18px;
-  padding: 18px 20px;
-  border: 1px solid rgba(97, 174, 239, .48);
-  border-radius: 18px;
+  margin-top:18px;
+  padding:18px 20px;
+  border-radius:18px;
 }
-
-.ford-player-heading {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 13px;
-  align-items: center;
-}
-
+.ford-player-heading { display:flex;gap:12px;margin-bottom:13px;align-items:center; }
 .ford-player-icon {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(110, 190, 255, .5);
-  border-radius: 50%;
-  background: rgba(2, 14, 25, .62);
-  color: var(--ford-bright);
-  font-size: 21px;
-  place-items: center;
+  display:grid;width:44px;height:44px;border:1px solid rgba(110,190,255,.5);
+  border-radius:50%;background:rgba(2,14,25,.60);color:var(--ford-bright);font-size:21px;place-items:center;
 }
-
-.ford-player-kicker {
-  display: block;
-  margin-bottom: 4px;
-  color: #8fb9db;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-}
-
-.ford-track-name {
-  display: block;
-  color: var(--ford-pale);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.ford-audio {
-  display: block;
-  width: 100%;
-  height: 40px;
-  margin-bottom: 12px;
-  filter: saturate(.75) hue-rotate(170deg) brightness(1.04);
-}
-
-.ford-player-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
+.ford-player-kicker { display:block;margin-bottom:4px;color:#90bde0;font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase; }
+.ford-track-name { display:block;color:var(--ford-pale);font-size:14px;font-weight:700; }
+.ford-audio { display:block;width:100%;height:40px;margin-bottom:12px; }
+.ford-player-actions { display:flex;flex-wrap:wrap;gap:8px; }
 .ford-player-button {
-  min-height: 36px;
-  padding: 8px 13px;
-  border: 1px solid rgba(99, 178, 244, .42);
-  border-radius: 999px;
-  background: rgba(2, 14, 25, .58);
-  color: var(--ford-pale);
-  font: 700 12px "Segoe UI", Arial, sans-serif;
-  cursor: pointer;
+  min-height:36px;padding:8px 13px;border:1px solid rgba(99,178,244,.42);border-radius:999px;
+  background:rgba(2,14,25,.58);color:var(--ford-pale);font:700 12px "Segoe UI",Arial,sans-serif;cursor:pointer;
 }
+.ford-player-button:disabled { opacity:.42;cursor:not-allowed; }
+.ford-file-button { display:inline-grid;align-items:center; }
+.ford-file-input { position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%); }
 
-.ford-player-button:hover,
-.ford-player-button:focus-visible {
-  border-color: var(--ford-bright);
-  outline: none;
-  box-shadow: 0 0 12px rgba(65, 157, 233, .18);
-}
-
-.ford-player-button:disabled {
-  cursor: not-allowed;
-  opacity: .42;
-}
-
-.ford-file-button {
-  display: inline-grid;
-  align-items: center;
-}
-
-.ford-file-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-
-.ford-section {
-  overflow: hidden;
-  padding: 27px;
-}
-
+.ford-section { margin-top:18px;padding:27px;border-radius:20px; }
 .ford-section-title {
-  margin-bottom: 20px;
-  text-align: center;
-  color: #f3f9ff;
-  font-size: clamp(20px, 3.2vw, 28px);
-  font-weight: 850;
+  margin:0 0 20px;text-align:center;color:#f3f9ff;font-size:clamp(20px,3.2vw,28px);font-weight:850;
 }
-
-.ford-section-title span {
-  display: inline-block;
-  padding: .32em .7em;
-  border-bottom: 2px solid var(--ford-blue);
-}
-
-.ford-link-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
+.ford-link-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px; }
 .ford-card {
-  position: relative;
-  display: grid;
-  min-height: 116px;
-  padding: 18px 54px 18px 19px;
-  overflow: hidden;
-  border: 1px solid rgba(102, 181, 246, .42);
-  border-radius: 15px;
-  background: linear-gradient(135deg, rgba(13, 51, 83, .78), rgba(2, 18, 32, .86));
-  color: var(--ford-pale);
-  text-decoration: none;
-  align-content: center;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, .32), inset 0 0 24px rgba(70, 156, 228, .035);
-  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+  position:relative;display:grid;min-height:112px;padding:18px 54px 18px 19px;overflow:hidden;
+  border:1px solid rgba(102,181,246,.42);border-radius:15px;
+  background:linear-gradient(135deg,rgba(12,49,82,.78),rgba(2,17,31,.84));
+  color:var(--ford-pale);text-decoration:none;align-content:center;
+  box-shadow:0 12px 24px rgba(0,0,0,.30);transition:.16s ease;
 }
-
 .ford-card::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background: linear-gradient(var(--ford-bright), #1a6eb5);
-  content: "";
+  position:absolute;top:0;left:0;width:5px;height:100%;background:linear-gradient(var(--ford-bright),#176db2);content:"";
 }
+.ford-card:hover { transform:translateY(-3px);border-color:var(--ford-bright); }
+.ford-card--wide { grid-column:span 2; }
+.ford-card-type { margin-bottom:8px;color:#8fb9db;font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase; }
+.ford-card-label { color:#f6fbff;font-size:clamp(18px,2.5vw,23px);font-weight:850;line-height:1.15; }
+.ford-card-arrow { position:absolute;right:19px;top:50%;color:var(--ford-bright);font-size:32px;transform:translateY(-50%); }
+.ford-card[data-pending-link] { cursor:not-allowed;opacity:.76; }
+.ford-pending-message { min-height:22px;margin:16px 0 0;color:#a9cce7;text-align:center;font-size:13px; }
+.ford-back { border-color:rgba(94,173,238,.4);background:rgba(3,18,31,.58);color:var(--ford-pale); }
+.ford-footer { color:#b7ccdc;text-shadow:0 1px 8px rgba(0,0,0,.55); }
 
-.ford-card:hover,
-.ford-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: var(--ford-bright);
-  outline: none;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, .42), 0 0 18px rgba(63, 145, 223, .18);
+@media (prefers-reduced-motion:reduce) {
+  .ford-water-fx * { animation:none !important; }
 }
-
-.ford-card--wide {
-  grid-column: span 2;
-}
-
-.ford-card-type {
-  margin-bottom: 8px;
-  color: #8fb9db;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-.ford-card-label {
-  color: #f6fbff;
-  font-size: clamp(18px, 2.5vw, 23px);
-  font-weight: 850;
-  line-height: 1.15;
-}
-
-.ford-card-arrow {
-  position: absolute;
-  right: 19px;
-  top: 50%;
-  color: var(--ford-bright);
-  font-size: 32px;
-  line-height: 1;
-  transform: translateY(-50%);
-}
-
-.ford-card[data-pending-link] {
-  cursor: not-allowed;
-  opacity: .76;
-}
-
-.ford-pending-message {
-  min-height: 22px;
-  margin: 16px 0 0;
-  color: #a9cce7;
-  text-align: center;
-  font-size: 13px;
-}
-
-.ford-back {
-  border-color: rgba(94, 173, 238, .4);
-  background: rgba(3, 18, 31, .58);
-  color: var(--ford-pale);
-}
-
-.ford-footer {
-  color: #b7ccdc;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
-}
-
-@media (max-width: 700px) {
-  .ford-page {
-    padding: 18px;
-    background-attachment: scroll;
-  }
-
-  .ford-hero {
-    padding: 31px 20px 29px;
-  }
-
-  .ford-section,
-  .ford-player {
-    padding: 18px;
-  }
-
-  .ford-link-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ford-card--wide {
-    grid-column: auto;
-  }
-
-  .ford-view-toggle {
-    top: 9px;
-    right: 9px;
-  }
+@media (max-width:700px) {
+  .ford-page { padding:18px;background-attachment:scroll; }
+  .ford-hero { padding:25px 18px 26px; }
+  .ford-section,.ford-player { padding:18px; }
+  .ford-link-grid { grid-template-columns:1fr; }
+  .ford-card--wide { grid-column:auto; }
 }

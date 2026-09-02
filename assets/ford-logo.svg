@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 192" role="img" aria-labelledby="title">
+<title>Ford</title>
+<defs>
+  <radialGradient id="b" cx="50%" cy="42%" r="68%">
+    <stop offset="0" stop-color="#3188d3"/>
+    <stop offset="0.58" stop-color="#0868b4"/>
+    <stop offset="1" stop-color="#003d78"/>
+  </radialGradient>
+</defs>
+<ellipse cx="256" cy="96" rx="244" ry="84" fill="url(#b)" stroke="#fff" stroke-width="11"/>
+<ellipse cx="256" cy="96" rx="230" ry="71" fill="none" stroke="#a9d8fa" stroke-width="3" opacity=".8"/>
+<text x="256" y="123" fill="#fff" font-size="92" text-anchor="middle"
+      font-family="Brush Script MT, Segoe Script, cursive" font-style="italic" font-weight="700">Ford</text>
+</svg>

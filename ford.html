@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b5fa5">
+  <meta name="theme-color" content="#07599c">
   <title>Ford Catalogues And Services</title>
-
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/ford.css">
-
   <script src="music/playlist.js"></script>
   <script defer src="assets/site.js"></script>
 </head>
-
 <body class="ford-page">
+
+  <!-- Animation is transparent and sits over the static background only. -->
+  <div class="ford-water-fx" aria-hidden="true">
+    <div class="ford-light-rays"></div>
+    <div class="ford-bubbles ford-bubbles--a"></div>
+    <div class="ford-bubbles ford-bubbles--b"></div>
+    <div class="ford-bubbles ford-bubbles--c"></div>
+    <div class="ford-fish ford-fish--one">🐠</div>
+    <div class="ford-fish ford-fish--two">🐟</div>
+    <div class="ford-fish ford-fish--three">🐠</div>
+  </div>
 
   <button
     class="ford-view-toggle"
@@ -27,10 +35,10 @@
   </button>
 
   <main class="wrap ford-wrap">
-
     <header class="hero ford-hero">
+      <img class="ford-logo" src="assets/ford-logo.svg" alt="Ford">
       <div class="eyebrow ford-eyebrow">Ford Resource Portal</div>
-      <h1 class="ford-title"><span>Ford</span></h1>
+      <h1 class="ford-title">Catalogues &amp; Services</h1>
       <p class="ford-intro">
         Quick access to Ford catalogues, parts resources, guides and service tools.
       </p>
@@ -50,78 +58,56 @@
       <div class="ford-player-actions">
         <button class="ford-player-button" type="button" data-mg-previous disabled>Previous</button>
         <button class="ford-player-button" type="button" data-mg-reload>Reload Folder</button>
-
-        <label class="ford-player-button ford-file-button" for="ford-music-files">
-          Choose Music
-        </label>
-
-        <input
-          class="ford-file-input"
-          id="ford-music-files"
-          data-mg-files
-          type="file"
-          accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac"
-          multiple
-        >
-
+        <label class="ford-player-button ford-file-button" for="ford-music-files">Choose Music</label>
+        <input class="ford-file-input" id="ford-music-files" data-mg-files type="file"
+               accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" multiple>
         <button class="ford-player-button" type="button" data-mg-next disabled>Next</button>
       </div>
     </section>
 
     <section class="section ford-section" aria-labelledby="ford-resources-heading">
-      <h2 id="ford-resources-heading" class="ford-section-title">
-        <span>Select A Resource</span>
-      </h2>
+      <h2 id="ford-resources-heading" class="ford-section-title">Select A Resource</h2>
 
       <div class="ford-link-grid">
-
         <a class="ford-card ford-card--wide" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Ford Parts Catalogue</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
         <a class="ford-card" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Parts Check / Locator</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
         <a class="ford-card" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Parts Guides</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
         <a class="ford-card" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Accessories</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
         <a class="ford-card" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Technical Information</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
         <a class="ford-card ford-card--wide" href="#" data-pending-link aria-disabled="true">
           <span class="ford-card-type">Ford Resource</span>
           <span class="ford-card-label mg-sign-label">Credit / Support Request</span>
           <span class="ford-card-arrow" aria-hidden="true">›</span>
         </a>
-
       </div>
 
       <p class="ford-pending-message" data-pending-message role="status" aria-live="polite"></p>
-
       <a class="back ford-back" href="index.html">← Back to Home</a>
     </section>
 
     <div class="footer ford-footer">
       Made by Briannha Harkin · <span data-year></span>
     </div>
-
   </main>
 </body>
 </html>
