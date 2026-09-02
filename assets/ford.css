@@ -80,43 +80,95 @@
   to   { translate:12px -88%; }
 }
 
-/* Small foreground fish only; they never obscure the house. */
+/* Small foreground fish only; they never obscure the house.
+   These are CSS-drawn so they always face the direction they travel. */
 .ford-fish {
   position:absolute;
+  width:54px;
+  height:30px;
+  border-radius:55% 48% 48% 55%;
+  background:
+    linear-gradient(90deg, rgba(255,188,65,.95), rgba(54,147,217,.95));
+  box-shadow:
+    inset -10px 0 0 rgba(9,69,117,.28),
+    0 5px 10px rgba(0,0,0,.20);
   opacity:.72;
-  font-size:clamp(28px,3vw,52px);
-  filter:drop-shadow(0 5px 5px rgba(0,0,0,.26));
   will-change:transform;
 }
+.ford-fish::before {
+  position:absolute;
+  top:4px;
+  left:-18px;
+  width:0;
+  height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-right:20px solid rgba(255,177,47,.92);
+  content:"";
+}
+.ford-fish::after {
+  position:absolute;
+  top:8px;
+  right:9px;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#06121e;
+  box-shadow:0 0 0 2px rgba(255,255,255,.65);
+  content:"";
+}
+
+/* Right-moving fish: nose points right, tail is on the left. */
 .ford-fish--one {
   top:23%;
-  left:-8%;
+  left:-9%;
   animation:ford-fish-right 24s linear infinite;
 }
+
+/* Left-moving fish: mirror the fish so the nose points left. */
 .ford-fish--two {
   top:48%;
-  right:-8%;
+  right:-9%;
+  background:linear-gradient(90deg, rgba(74,170,230,.95), rgba(237,205,55,.95));
   transform:scaleX(-1);
   animation:ford-fish-left 31s linear -9s infinite;
 }
+
+/* Smaller right-moving fish lower in the scene. */
 .ford-fish--three {
   top:68%;
-  left:-8%;
-  font-size:clamp(20px,2.3vw,38px);
+  left:-9%;
+  width:40px;
+  height:22px;
+  opacity:.60;
   animation:ford-fish-right-low 35s linear -17s infinite;
 }
+.ford-fish--three::before {
+  top:3px;
+  left:-14px;
+  border-top-width:8px;
+  border-bottom-width:8px;
+  border-right-width:16px;
+}
+.ford-fish--three::after {
+  top:6px;
+  right:7px;
+  width:4px;
+  height:4px;
+}
+
 @keyframes ford-fish-right {
-  0% { transform:translate3d(0,0,0) rotate(-2deg); }
-  45% { transform:translate3d(52vw,18px,0) rotate(2deg); }
-  100% { transform:translate3d(116vw,-8px,0) rotate(-2deg); }
+  0%   { transform:translate3d(0,0,0); }
+  45%  { transform:translate3d(52vw,18px,0); }
+  100% { transform:translate3d(116vw,-8px,0); }
 }
 @keyframes ford-fish-left {
-  0% { transform:scaleX(-1) translate3d(0,0,0); }
-  50% { transform:scaleX(-1) translate3d(58vw,-14px,0); }
+  0%   { transform:scaleX(-1) translate3d(0,0,0); }
+  50%  { transform:scaleX(-1) translate3d(58vw,-14px,0); }
   100% { transform:scaleX(-1) translate3d(116vw,8px,0); }
 }
 @keyframes ford-fish-right-low {
-  0% { transform:translate3d(0,0,0); }
+  0%   { transform:translate3d(0,0,0); }
   100% { transform:translate3d(116vw,-18px,0); }
 }
 
